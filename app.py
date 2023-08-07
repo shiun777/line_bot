@@ -33,13 +33,12 @@ def handle_message(event):
     if event.message.text == "油價查詢":
         content = oil_price()
         line_bot_api.reply_message(
-            event.relpy_token,
+            event.reply_token,
             TextSendMessage(text=content))
     
 @handler.add(FollowEvent)
 def handler_follow(event):
-    welcome_msg = '''
-Hello!
+    welcome_msg = '''Hello!
 很高興認識你
 這裡有股市、匯率等資訊
 還需要其他幫助嗎?'''
