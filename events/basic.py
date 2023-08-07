@@ -36,8 +36,8 @@ def push_msg(event,msg):
         user_id = event.sorce.user_id
         line_bot_api.push_message(user_id, TextSendMessage(text=msg))
     except:
-        user_id = event.sorce.user_id
-        line_bot_api.push_message(user_id, TextSendMessage(text=msg))
+        room_id = event.sorce.user_id
+        line_bot_api.push_message(room_id, TextSendMessage(text=msg))
     
 def Usage(event):
     push_msg(event, " 👀 查詢方法 👀 \
