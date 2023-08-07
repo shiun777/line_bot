@@ -43,6 +43,8 @@ def handle_message(event):
     
     text_message = TextSendMessage(text='''$ $
 Hello!
+很高興認識你
+需要甚麼幫助呢
 ''', emojis=emoji)
     # message = TextMessage(text=event.message.text)
     # line_bot_api.reply_message(event.reply_token, message)
