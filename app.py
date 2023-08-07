@@ -10,7 +10,7 @@ line_bot_api = LineBotApi('iMv8xguByzNjw1Iqz5dLPngS4mjjccdp6aF9dqdZBlSFMMKimZlb3
 handler = WebhookHandler('6e206be78064b105252cbfba09d43d27')
 
 #監聽
-@app.route("/callbakc", methods=['POST'])
+@app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
     
