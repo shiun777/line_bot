@@ -31,6 +31,31 @@ Hello!
         event.reply_token,
         [text_message, sticker_message]
     )
+    
+    buttons_template = TemplateSendMessage(
+            alt_text= '小幫手 template',
+            template=ButtonsTemplate(
+                title='選擇服務',
+                text='請選擇',
+                thumbnail_image_url='https://i.imgur.com/ZgZ5lME.jpg',
+                actions=[
+                    MessageTemplateAction(
+                        label='油價查詢',
+                        text='油價查詢'
+                    ),
+                    MessageTemplateAction(
+                        label='匯率查詢',
+                        text='匯率查詢'
+                    ),
+                    MessageTemplateAction(
+                        label='股價查詢',
+                        text='股價查詢'
+                    )
+                ]
+            )
+        )
+    line_bot_api.reply_message(event.reply_token, buttons_template)
+    
 def push_msg(event,msg):
     try:
         user_id = event.source.user_id
