@@ -38,7 +38,7 @@ def handle_message(event):
     
 @handler.add(FollowEvent)
 def handler_follow(event):
-    welcome_msg = '''$ $
+    welcome_msg = '''
 Hello!
 很高興認識你
 這裡有股市、匯率等資訊
