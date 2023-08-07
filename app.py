@@ -32,7 +32,7 @@ def handle_message(event):
             template=ButtonsTemplate(
                 title='選擇服務',
                 text='請選擇',
-                thumbnail_image_url='https://i.imgur.com/ZgZ5lME.jpeg',
+                thumbnail_image_url='https://i.imgur.com/ZgZ5lME.jpg',
                 actions=[
                     MessageTemplateAction(
                         label='油價查詢',
