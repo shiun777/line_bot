@@ -27,8 +27,34 @@ def callback():
 #處理
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = TextMessage(text=event.message.text)
-    line_bot_api.reply_message(event.reply_token, message)
+    
+    emoji = [
+        {
+            "index" : 0,
+            "productId": "5ac1bfd5040ab15980c9b435",
+            "emojiId": "002"
+        },
+        {
+            "index" : 2,
+            "productId": "5ac1bfd5040ab15980c9b435",
+            "emojiId": "002"
+        }
+    ]
+    
+    text_message = TextSendMessage(text='''$ $
+Hello!
+''', emojis=emoji)
+    # message = TextMessage(text=event.message.text)
+    # line_bot_api.reply_message(event.reply_token, message)
+    
+    sticker_message = StickerMessage(
+        package_id='11538',
+        sticker_id='51626494'
+    )
+    line_bot_api.reply_message(
+        event.reply_token,
+        [text_message, sticker_message]
+    )
     
 if __name__ == "__main__":
     app.run()
