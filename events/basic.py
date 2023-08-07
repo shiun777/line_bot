@@ -27,10 +27,6 @@ Hello!
         package_id='11538',
         sticker_id='51626494'
     )
-    line_bot_api.reply_message(
-        event.reply_token,
-        [text_message, sticker_message]
-    )
     
     buttons_template = TemplateSendMessage(
             alt_text= '小幫手 template',
@@ -54,7 +50,10 @@ Hello!
                 ]
             )
         )
-    line_bot_api.reply_message(event.reply_token, buttons_template)
+    line_bot_api.reply_message(
+        event.reply_token, 
+        [text_message,sticker_message,buttons_template]
+    )
     
 def push_msg(event,msg):
     try:
