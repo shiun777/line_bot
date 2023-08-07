@@ -31,3 +31,20 @@ Hello!
         event.reply_token,
         [text_message, sticker_message]
     )
+def push_msg(event,msg):
+    try:
+        user_id = event.sorce.user_id
+        line_bot_api.push_message(user_id, TextSendMessage(text=msg))
+    except:
+        user_id = event.sorce.user_id
+        line_bot_api.push_message(user_id, TextSendMessage(text=msg))
+    
+def Usage(event):
+    push_msg(event, " 👀 查詢方法 👀 \
+                    \n\
+                    \n 小幫手可查詢油價➡️匯率➡️股價\
+                    \n\
+                    \n 油價通知 ➡️➡️➡️ 輸入查詢油價\
+                    \n 股價通知 ➡️➡️➡️ 輸入查詢'股票代號'\
+                    \n 匯率通知 ➡️➡️➡️ 輸入查詢匯率\
+                    \n 匯率兌換 ➡️➡️➡️ 輸入換匯USD/TWD")
