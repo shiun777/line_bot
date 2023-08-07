@@ -1,5 +1,7 @@
 from line_bot_api import *
 from events.basic import *
+from events.oil import *
+
 app = Flask(__name__)
 
 #監聽
@@ -22,10 +24,17 @@ def callback():
 def handle_message(event):
     messages_text = str(event.message.text).lower()
     
+    
+    ######## 適用說明 選單 油價查詢
     if messages_text == '@使用說明':
         about_us_event(event)
         Usage(event)
      
+    if event.message.text == "想知道油價":
+        content = oil_price()
+        line_bot_api.reply_message(
+            event.relpy_token,
+            TextSendMessage(text=content))
     
       
 if __name__ == "__main__":
