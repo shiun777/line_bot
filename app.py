@@ -36,6 +36,22 @@ def handle_message(event):
             event.relpy_token,
             TextSendMessage(text=content))
     
+@handler.add(FollowEvent)
+def handler_follow(event):
+    welcome_msg = '''$ $
+Hello!
+很高興認識你
+這裡有股市、匯率等資訊
+還需要其他幫助嗎?'''
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=welcome_msg))
+    
+@handler.add(UnfollowEvent)
+def handle_unfollow(event):
+    print(event)
+
       
 if __name__ == "__main__":
     app.run()
