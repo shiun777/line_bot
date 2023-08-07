@@ -33,10 +33,10 @@ Hello!
     )
 def push_msg(event,msg):
     try:
-        user_id = event.sorce.user_id
+        user_id = event.source.user_id
         line_bot_api.push_message(user_id, TextSendMessage(text=msg))
     except:
-        room_id = event.sorce.user_id
+        room_id = event.source.user_id
         line_bot_api.push_message(room_id, TextSendMessage(text=msg))
     
 def Usage(event):
