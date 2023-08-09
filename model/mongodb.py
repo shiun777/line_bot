@@ -31,7 +31,7 @@ def write_my_stock(userID, user_name, stockNumber, condition, target_price):
         collect.insert_one({
             "userID": userID,
             "favorite_stock": stockNumber,
-            "cindition": cindition,
+            "cindition": condition,
             "price": target_price,
             "tag": "stock",
             "date_info": datetime.now()
