@@ -35,17 +35,17 @@ def handle_message(event):
     user_name = profile.display_name
     
     
-    ######## 適用說明 選單 油價查詢
+    ######## -----------------------------適用說明 選單 油價查詢-----------------------------
     if messages_text == '@使用說明':
         about_us_event(event)
         Usage(event)
      
-    if event.message.text == "油價查詢":
+    if event.message.text == "想知道油價":
         content = oil_price()
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=content))
-    ########## 股票
+    ########## -----------------------------股票------------------------------------
     if event.message.text == "股價查詢":
         line_bot_api.push_message(uid, TextSendMessage("請輸入#加股票代號"))
         
@@ -97,6 +97,11 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=content)
         )
+        
+    ###-----------------------------------匯率區---------------------------------------
+    if re.match('幣別種類',emsg):
+        message = show_Button()
+        line_bot_api.reply_message(event.reply_token,message)
     
     
         
