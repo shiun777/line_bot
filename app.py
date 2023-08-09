@@ -52,7 +52,7 @@ def handle_message(event):
         btn_msg = stock_reply_other(stockNumber)    
         line_bot_api.push_message(uid, btn_msg)
         return 0
-    if(emsg.startwith('#')):
+    if(emsg.startswith('#')):
         text = emsg[1:]
         content = ''
         
