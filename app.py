@@ -35,7 +35,7 @@ def handle_message(event):
     msg = str(event.message.text).upper().strip()
     emsg = event.message.text
     user_name = profile.display_name
-    
+    stockNumber = ""
     
     ######## -----------------------------適用說明 選單 油價查詢-----------------------------
     if messages_text == '@使用說明':
