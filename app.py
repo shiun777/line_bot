@@ -1,6 +1,10 @@
 from line_bot_api import *
 from events.basic import *
 from events.oil import *
+from events.Msg_Template import *
+import re
+import twstock
+import datetime
 
 app = Flask(__name__)
 
@@ -25,6 +29,8 @@ def handle_message(event):
     profile = line_bot_api.get_profile(event.source.user_id)
     uid = profile.user_id
     messages_text = str(event.message.text).lower()
+    msg = str(event.message.text).upper().strip()
+    emsg = event.message.text
     
     
     ######## 適用說明 選單 油價查詢
@@ -40,6 +46,46 @@ def handle_message(event):
     ########## 股票
     if event.message.text == "股價查詢":
         line_bot_api.push_message(uid, TextSendMessage("請輸入#加股票代號"))
+        
+    if re.match("想知道股價[0-9]", msg):
+        stockNumber = msg[2:6]
+        btn_msg = stock_reply_other(stockNumber)    
+        line_bot_api.push_message(uid, btn_msg)
+        return 0
+    if(emsg.startwith('#')):
+        text = emsg[1:]
+        content = ''
+        
+        stock_rt = twstock.realtime.get(text)
+        my_datetime = datetime.datetime.fromtimestamp(stock_rt['timestamp']+8*60*60)
+        my_time = my_datetime.strftime('%H:%M:%S')
+        
+        content += '%s (%s) %s\n' %(
+            stock_rt['info']['name'],
+            stock_rt['info']['code'],
+            my_time)
+        content += '現價: %s / 開盤: %s\n'%(
+            stock_rt['realtime']['lastet_trade_price'],
+            stock_rt['realtime']['open'])
+        content += '最高: %s / 最低: %s\n'%(
+            stock_rt['realtime']['high'],
+            stock_rt['realtime']['low'])
+        content += '量: %s\n' %(stock_rt['realtime']['accumulate_trade_volume'])
+        
+        stock = twstock.Stock(text)
+        content += '-----\n'
+        content += '最近五日價格: \n'
+        price5 = stock.price[-5:][::-1]
+        date5 = stock.date[-5:][::-1]
+        for i in range(len(price5)):
+            content += '[%s] %s\n' %(date5[i].strftime("%Y-%m-%d"), price5[i])
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=content)
+        )
+                
+        
+        
     
 @handler.add(FollowEvent)
 def handler_follow(event):
