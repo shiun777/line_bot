@@ -47,7 +47,7 @@ def handle_message(event):
     if event.message.text == "股價查詢":
         line_bot_api.push_message(uid, TextSendMessage("請輸入#加股票代號"))
         
-    if re.match("想知道股價[0-9]", msg):
+    if re.match("想知道股價", msg):
         stockNumber = msg[2:6]
         btn_msg = stock_reply_other(stockNumber)    
         line_bot_api.push_message(uid, btn_msg)
@@ -77,9 +77,9 @@ def handle_message(event):
         content += '最近五日價格: \n'
         price5 = stock.price[-5:][::-1]
         date5 = stock.date[-5:][::-1]
-        for i in range(len(price5)):
+    for i in range(len(price5)):
             content += '[%s] %s\n' %(date5[i].strftime("%Y-%m-%d"), price5[i])
-        line_bot_api.reply_message(
+    line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=content)
         )
