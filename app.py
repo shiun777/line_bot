@@ -8,6 +8,7 @@ import re
 import twstock
 import datetime
 
+
 app = Flask(__name__)
 
 #監聽

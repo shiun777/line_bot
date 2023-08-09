@@ -1,4 +1,5 @@
 from line_bot_api import *
+import requests
 
 def getCurrencyName(currency):
     currency_list = { 
@@ -28,7 +29,7 @@ def getCurrencyName(currency):
 def getExchangeRate(msg):
     """
     sample
-    code = '換匯USD/TWD/100;
+    code = '換匯USD/TWD/100'
     code = '換匯USD/JPY/100'
     """
     currency_list = msg[2:].split("/")
@@ -36,7 +37,7 @@ def getExchangeRate(msg):
     currency1 = currency_list[1]
     money_value = currency_list[2]
     url_coinbase = 'https://api.coinbase.com/v2/exchange-rates?currency=' + currency
-    res = request.get(url_coinbase)
+    res = requests.get(url_coinbase)
     jData = res.json()
     pd_currency = jData['data']['rates']
     content = f'目前的兌換率為:{pd_currency[currency1]} {currency1} \n查詢的金額為:'
