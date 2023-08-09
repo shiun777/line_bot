@@ -62,9 +62,6 @@ def handle_message(event):
         line_bot_api.push_message(uid, TextSendMessage("加入股票代號"+stockNumber))
         content = write_my_stock(uid, user_name, stockNumber, msg[6:7], msg[7:])
         line_bot_api.push_message(uid, TextSendMessage(content))
-    else:
-        content = write_my_stock(uid, user_name, stockNumber, "未設定", "未設定")
-        line_bot_api.push_message(uid, TextSendMessage(content))
         return 0
     
     
