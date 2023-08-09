@@ -65,7 +65,7 @@ def handle_message(event):
             stock_rt['info']['code'],
             my_time)
         content += '現價: %s / 開盤: %s\n'%(
-            stock_rt['realtime']['lastet_trade_price'],
+            stock_rt['realtime']['lastest_trade_price'],
             stock_rt['realtime']['open'])
         content += '最高: %s / 最低: %s\n'%(
             stock_rt['realtime']['high'],
@@ -77,9 +77,9 @@ def handle_message(event):
         content += '最近五日價格: \n'
         price5 = stock.price[-5:][::-1]
         date5 = stock.date[-5:][::-1]
-    for i in range(len(price5)):
+        for i in range(len(price5)):
             content += '[%s] %s\n' %(date5[i].strftime("%Y-%m-%d"), price5[i])
-    line_bot_api.reply_message(
+        line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=content)
         )
