@@ -160,7 +160,7 @@ def handle_message(event):
         def look_stock_price(stock, condition, price, userID):
             print(userID)
             url = "https://tw.stock.yahoo.com/q/q?s=" + stock
-            list_req = request.get(url)
+            list_req = requests.get(url)
             soup = BeautifulSoup(list_req.content, "html.parser")
             getstock = soup.findAll('b')[1].text
             content = stock + "當前股市價格為:" + getstock
