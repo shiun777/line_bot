@@ -8,6 +8,7 @@ import re
 import twstock
 import datetime
 from bs4 import BeautifulSoup
+import requests
 
 
 app = Flask(__name__)
