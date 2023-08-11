@@ -77,7 +77,7 @@ def handle_message(event):
     
     if re.match('股票清單',msg):
         line_bot_api.push_message(uid, TextSendMessage("請稍等..."))
-        content = delete_my_stock(user_name, uid)
+        content = show_stock_setting(user_name, uid)
         line_bot_api.push_message(uid, TextSendMessage(content))
         return 0
         
