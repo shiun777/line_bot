@@ -36,16 +36,16 @@ Hello!
                 thumbnail_image_url='https://i.imgur.com/ZgZ5lME.jpg',
                 actions=[
                     MessageTemplateAction(
-                        label='油價查詢',
-                        text='油價查詢'
+                        label='查詢油價',
+                        text='查詢油價'
                     ),
                     MessageTemplateAction(
-                        label='匯率查詢',
-                        text='匯率查詢'
+                        label='查詢匯率',
+                        text='查詢匯率'
                     ),
                     MessageTemplateAction(
-                        label='股價查詢',
-                        text='股價查詢'
+                        label='查詢股價',
+                        text='查詢股價'
                     )
                 ]
             )
