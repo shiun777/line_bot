@@ -86,12 +86,12 @@ def show_stock_setting(user_name, userID) :
     dataList = list(collect.find({"userID": userID}))
     if dataList == []: return "你的股票清單為空，請新增股票至清單中"
     content = "你清單中的選股條件為: \n"
-    # for i in range (len(dataList)):
-    #     content += f'{dataList[i]["favorite_stock"]}{dataList[i]["condition"]}\n'
+    for i in range (len(dataList)):
+        content += f'{dataList[i]["favorite_stock"]}{dataList[i]["condition"]}\n'
     
-    for data in dataList:
-        stock_setting = f"{data['favorite_stock']} {data['condition']}\n"
-        content += stock_setting
+    # for data in dataList:
+    #     stock_setting = f"{data['favorite_stock']} {data['condition']}{dataList[i]["price"]}\n"
+    #     content += stock_setting
     
     return content
 
