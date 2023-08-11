@@ -101,5 +101,5 @@ def delete_my_stock(user_name, stockNumber):
 def delete_my_allstock(user_name, userID):
     db = constructor_stock()
     collect = db[user_name]
-    collect.delete_many({'favorite_stock': userID})
+    collect.delete_many({'userID': userID})
     return "全部刪除成功"
