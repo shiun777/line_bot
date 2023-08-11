@@ -162,7 +162,7 @@ def handle_message(event):
             url = "https://tw.stock.yahoo.com/q/q?s=" + stock
             list_req = requests.get(url)
             soup = BeautifulSoup(list_req.content, "html.parser")
-            getstock = soup.findAll('span')[1].text
+            getstock = soup.find("span", class_="Fz(32px) Fw(b) Lh(1) Mend(16px) D(f) Ai(c) C($c-trend-down)")
             content = stock + "當前股市價格為:" + getstock
             if condition == '<':
                 content += "\n篩選條件為: <" + price
