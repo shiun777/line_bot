@@ -48,7 +48,7 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=content))
     ########## -----------------------------股票------------------------------------
-    if event.message.text == "股價查詢":
+    if event.message.text == "查詢股價":
         line_bot_api.push_message(uid, TextSendMessage("請輸入#加股票代號"))
         
     if re.match("想知道股價", msg):
@@ -66,9 +66,21 @@ def handle_message(event):
     
     if re.match('股票清單',msg):
         line_bot_api.push_message(uid, TextSendMessage("請稍等..."))
-        content = show_stock_setting(user_name, uid)
+        content = delete_my_stock(user_name, uid)
         line_bot_api.push_message(uid, TextSendMessage(content))
+        return 0
         
+    if re.match('刪除[0-9]{4}',msg):
+        line_bot_api.push_message(uid, TextSendMessage("請稍等..."))
+        content = delete_my_stock(user_name, msg[2:])
+        line_bot_api.push_message(uid, TextSendMessage(content))
+        return 0
+    
+    if re.match('清空股票',msg):
+        line_bot_api.push_message(uid, TextSendMessage("請稍等..."))
+        content = delete_my_allstock(user_name, uid)
+        line_bot_api.push_message(uid, TextSendMessage(content))
+        return 0
     
     if(emsg.startswith('#')):
         text = emsg[1:]

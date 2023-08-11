@@ -89,3 +89,17 @@ def show_stock_setting(user_name, userID) :
     for i in range (len(dataList)):
         content += f'{dataList[i]["favorite_stock"]}{dataList[i]["condition"]}{dataList[i]["price"]}\n'
     return content
+
+#------------------ 刪除股票 --------------------------
+def delete_my_stock(user_name, stockNumber):
+    db = constructor_stock()
+    collect = db[user_name]
+    collect.delete_one({'favorite_stock': stockNumber})
+    return stockNumber + "刪除成功"
+
+#------------------ 刪除所有股票 -----------------------
+def delete_my_allstock(user_name, userID):
+    db = constructor_stock()
+    collect = db[user_name]
+    collect.delete_many({'favorite_stock': userID})
+    return "全部刪除成功"
