@@ -171,6 +171,7 @@ def handle_message(event):
                     line_bot_api.push_message(userID, TextSendMessage(text = content))
         def job():
             print('HH')
+            line_bot_api.push_message(uid, TextSendMessage("直接ALL IN"))
             dataList = cache_users_stock()
             for i in range(len(dataList)):
                 for k in range(len(dataList[i])):
