@@ -97,8 +97,7 @@ def show_stock_setting(user_name, userID) :
         content += f"{dataList[i]['favorite_stock']}{dataList[i]['condition']}{dataList[i]['price']}\n"
     return content
     
-    return content
-
+    
 #------------------ 刪除股票 --------------------------
 def delete_my_stock(user_name, stockNumber):
     db = constructor_stock()

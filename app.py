@@ -82,7 +82,6 @@ def handle_message(event):
         line_bot_api.push_message(uid, TextSendMessage("加入股票代號" + stockNumber))
         content = write_my_stock(uid, user_name, stockNumber, condition, price)
         line_bot_api.push_message(uid, TextSendMessage(content))
-
     
     if re.match('股票清單',msg):
         line_bot_api.push_message(uid, TextSendMessage("請稍等..."))
@@ -185,7 +184,7 @@ def handle_message(event):
             for i in range(len(dataList)):
                 for k in range(len(dataList[i])):
                     look_stock_price(dataList[i][k]['favorite_stock'], dataList[i][k]['condition'], dataList[i][k]['price'], dataList[i][k]['userID'])
-        schedule.every(30).seconds.do(job).tag('daily-tasks-stock' + uid, "second")
+        schedule.every(5).seconds.do(job).tag('daily-tasks-stock' + uid, "second")
     
         while True:
             schedule.run_pending()
