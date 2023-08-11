@@ -74,13 +74,13 @@ def handle_message(event):
         line_bot_api.push_message(uid, TextSendMessage("請稍等..."))
         content = delete_my_stock(user_name, msg[2:])
         line_bot_api.push_message(uid, TextSendMessage(content))
-        return 0
+        
     
     if re.match('清空股票',msg):
         line_bot_api.push_message(uid, TextSendMessage("請稍等..."))
         content = delete_my_allstock(user_name, uid)
         line_bot_api.push_message(uid, TextSendMessage(content))
-        return 0
+        
     
     if(emsg.startswith('#')):
         text = emsg[1:]
@@ -120,6 +120,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,message)
         
     if re.match("查詢匯率[A-Z]{3}",msg):
+        line_bot_api.push_message(uid, TextSendMessage("請稍等..."))
         msg = msg[4:]
         content = showCurrency(msg)
         line_bot_api.push_message(uid,TextSendMessage(content))
