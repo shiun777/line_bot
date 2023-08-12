@@ -27,5 +27,5 @@ def goole_map(event):
         )
     line_bot_api.reply_message(
         event.reply_token, 
-        [text_message,sticker_message,buttons_map]
+        [buttons_map]
     )
