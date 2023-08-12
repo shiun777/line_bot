@@ -17,7 +17,7 @@ def goole_map(event):
                     MessageTemplateAction(
                         label='附近機車行',
                         text='附近機車行'
-                    )
+                    ),
                     MessageTemplateAction(
                         label='附近美食',
                         text='附近美食'
