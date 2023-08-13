@@ -8,3 +8,7 @@ pymongo
 datetime
 gunicorn
 schedule
+numpy
+pandas
+matplotlib
+googlemaps
