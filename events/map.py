@@ -80,3 +80,32 @@ def callback():
     return 'OK'
 
 
+@handler.add(MessageEvent, message=TextMessage)
+def handle_text_message(event):
+    if event.message.text == '我要分享位置':
+        # 讓使用者分享位置
+        reply_message = '請點選下方的「位置」按鈕，然後選擇「傳送位置」。'
+    else:
+        # 其他處理邏輯
+        reply_message = '請點擊下方按鈕來分享位置。'
+    
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextMessage(text=reply_message)
+    )
+
+@handler.add(MessageEvent, message=LocationMessage)
+def handle_location_message(event):
+    # 使用者已分享位置
+    latitude = event.message.latitude
+    longitude = event.message.longitude
+    
+    # 進一步處理取得的位置資訊，例如使用 Google Maps API 來查詢地理資訊
+    # ...
+
+    reply_message = f'你的位置是：緯度 {latitude}，經度 {longitude}'
+    
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextMessage(text=reply_message)
+    )
