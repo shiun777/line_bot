@@ -243,15 +243,3 @@ if __name__ == "__main__":
     app.run()
 
 
-from flask import Flask, render_template
-
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    # 將您的 Google Maps API 金鑰放在這裡
-    api_key = "AIzaSyBuh_ZmBbKBjvtG95pGzaW2-bf77Vc2QoY"
-    return render_template('index.html', api_key=api_key)
-
-if __name__ == '__main__':
-    app.run(debug=True)
