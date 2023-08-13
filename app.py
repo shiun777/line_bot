@@ -57,8 +57,35 @@ def handle_message(event):
         Usage(event)
 
     if messages_text == '附近資訊':
-        goole_map(event)  
-     
+        google_map(event)  
+
+    if event.message.text == '附近停車場':
+        user_id = event.source.user_id
+        api_key = "AIzaSyBuh_ZmBbKBjvtG95pGzaW2-bf77Vc2QoY"
+
+        user_location = f"{event.message.latitude},{event.message.longitude}"
+        radius = 1000
+        api_key = "AIzaSyBuh_ZmBbKBjvtG95pGzaW2-bf77Vc2QoY"
+
+        nearby_parking = search_nearby_parking(user_location, radius, api_key)
+                
+        if nearby_parking:
+            reply_text = '附近的停車場有：\n'
+            for parking in nearby_parking:
+                name = parking['name']
+                address = parking['vicinity']
+                reply_text += f'名稱: {name}\n地址: {address}\n----------\n'
+        else:
+            reply_text = '附近沒有找到停車場。'
+
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextMessage(text=reply_text)
+        )
+
+
+
+
     if event.message.text == "想知道油價":
         content = oil_price()
         line_bot_api.reply_message(
@@ -214,3 +241,17 @@ def handle_unfollow(event):
       
 if __name__ == "__main__":
     app.run()
+
+
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    # 將您的 Google Maps API 金鑰放在這裡
+    api_key = "AIzaSyBuh_ZmBbKBjvtG95pGzaW2-bf77Vc2QoY"
+    return render_template('index.html', api_key=api_key)
+
+if __name__ == '__main__':
+    app.run(debug=True)
