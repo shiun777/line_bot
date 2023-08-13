@@ -95,15 +95,36 @@ def handle_text_message(event):
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location_message(event):
-    # 使用者已分享位置
+
+    
+    user_id = event.source.user_id
+    api_key = "AIzaSyBuh_ZmBbKBjvtG95pGzaW2-bf77Vc2QoY"
+
+# 使用者已分享位置
     latitude = event.message.latitude
     longitude = event.message.longitude
-    
-    # 進一步處理取得的位置資訊，例如使用 Google Maps API 來查詢地理資訊
-    # ...
+
+# 進一步處理取得的位置資訊，例如使用 Google Maps API 來查詢地理資訊
+# ...
 
     reply_message = f'你的位置是：緯度 {latitude}，經度 {longitude}'
     
+    user_location = f"{latitude},{longitude}"
+    if user_location:
+            radius = 1000
+            nearby_parking = search_nearby_parking(user_location, radius, api_key)
+    
+            if nearby_parking:
+                reply_text = '附近的停車場有：\n'
+                for parking in nearby_parking:
+                    name = parking['name']
+                    address = parking['vicinity']
+                    reply_text += f'名稱: {name}\n地址: {address}\n----------\n'
+            else:
+                reply_text = '附近沒有找到停車場。'
+    else:
+        reply_text = '無法獲取您的地理位置。'
+
     line_bot_api.reply_message(
         event.reply_token,
         TextMessage(text=reply_message)
